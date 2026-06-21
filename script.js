@@ -75,6 +75,21 @@ function renderBook(t,a,p,r,id,l){
         displayBooks();
         return 'Book deleted and updated';
     });
+    read.addEventListener('click',(e)=>{
+        const id = e.target.parentElement.classList[0];
+        const index = myLibrary.findIndex(i => i.id === id);
+        const item = myLibrary[index];
+        // change the item depending
+        if(item.read === 'Yes'){
+            item.read = 'No'
+        }else if(item.read === 'No'){
+            item.read = 'Yes'
+        }
+        // display the new books
+        clearBooks(l);
+        displayBooks();
+        return;
+    });
     // append everything in proper order
     bookCon.appendChild(title);
     bookCon.appendChild(author);
