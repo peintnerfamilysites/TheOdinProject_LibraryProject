@@ -1,3 +1,7 @@
+// Variables Global
+const addBook = document.querySelector('.addBook');
+const formSub = document.querySelector('.addBookForm');
+const formContainer = document.querySelector('.formContainer');
 const myLibrary = [];
 
 function Book(title,author,pages,read) {
@@ -80,5 +84,33 @@ function renderBook(t,a,p,r,id,l){
 
     return bookCon;
 }
+
+function handleForms(){
+    formContainer.classList.toggle('inactive');
+    formContainer.classList.toggle('active');
+    return;
+};
+
+// Event Listener for the add book button
+addBook.addEventListener('click',(e)=>{
+    handleForms();
+    return;
+});
+// Event Listener for the form submit
+formSub.addEventListener('submit',(e)=>{
+    e.preventDefault();
+    // Get form data
+    const data = new FormData(e.target);
+    const title = data.get('title');
+    const author = data.get('author');
+    const pages = data.get('pages');
+    let read = data.get('read') ? "Yes" : "No";
+    // Create the book
+    addBookToLibrary(title,author,pages,read);
+    // Display Books
+    handleForms();
+    displayBooks();
+    return;
+});
 
 console.log(myLibrary);
